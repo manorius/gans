@@ -41,26 +41,25 @@
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 
-
-  - [Installation](#installation)
-    - [Make vm](#make-vm)
-    - [Connect to vm](#connect-to-vm)
-    - [Setup vm](#setup-vm)
-    - [Clone repository](#clone-repository)
-    - [Vscode remote editing](#vscode-remote-editing)
-    - [Create environment](#create-environment)
-    - [Install pytorch](#install-pytorch)
-  - [install apex](#install-apex)
-    - [Setup kaggle's api](#setup-kaggles-api)
-    - [Download datasets from google drive](#download-datasets-from-google-drive)
-- [Documentation](#documentation)
-  - [U-GAT-IT](#u-gat-it)
-    - [Colab](#colab)
-    - [GCP (Pytorch version)](#gcp-pytorch-version)
-- [Contributing](#contributing)
-- [Authors](#authors)
-- [License](#license)
-- [Acknowledgements](#acknowledgements)
+-   [Installation](#installation)
+    -   [Make vm](#make-vm)
+    -   [Connect to vm](#connect-to-vm)
+    -   [Setup vm](#setup-vm)
+    -   [Clone repository](#clone-repository)
+    -   [Vscode remote editing](#vscode-remote-editing)
+    -   [Create environment](#create-environment)
+    -   [Install pytorch](#install-pytorch)
+-   [install apex](#install-apex)
+    -   [Setup kaggle's api](#setup-kaggles-api)
+    -   [Download datasets from google drive](#download-datasets-from-google-drive)
+-   [Documentation](#documentation)
+    -   [U-GAT-IT](#u-gat-it)
+        -   [Colab](#colab)
+        -   [GCP (Pytorch version)](#gcp-pytorch-version)
+-   [Contributing](#contributing)
+-   [Authors](#authors)
+-   [License](#license)
+-   [Acknowledgements](#acknowledgements)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -171,7 +170,7 @@ This repository is still a work in progress, so if you find a bug, think there i
 
 # Authors
 
--   _Bilal Khan_ - _Forked the repository and added some features_
+-   _Bilal Khan_ - _Initial work_
 
 # License
 
@@ -179,6 +178,6 @@ This project is licensed under the MIT license - see the [license](LICENSE) file
 
 # Acknowledgements
 
-This project contains code from: _list_
+This project contains code from: (https://github.com/taki0112/UGATIT),
 
 This README is based on (https://github.com/bkkaggle/grover) and (https://github.com/rish-16/gpt2client)
