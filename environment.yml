@@ -1,0 +1,19 @@
+name: gans
+dependencies:
+    - numpy
+    - pandas
+    - matplotlib
+    - scikit-learn
+    - pip
+    - pip:
+          - opencv-python
+          - scikit-image
+          - tqdm
+          - mlcrate
+          - kaggle
+          - pydicom
+          - fastai
+          - pytorch_zoo
+          - tb-nightly
+          - fire
+          - albumentations
