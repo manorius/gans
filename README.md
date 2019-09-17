@@ -41,33 +41,28 @@
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 
--   [Installation](#installation)
-    -   [Colab](#colab)
-    -   [Kaggle](#kaggle)
-    -   [GCP](#gcp)
-        -   [Vscode remote setup](#vscode-remote-setup)
--   [Documentation](#documentation)
-    -   [Generation](#generation)
-        -   [`python generate.py`](#python-generatepy)
--   [Contributing](#contributing)
--   [Authors](#authors)
--   [License](#license)
--   [Acknowledgements](#acknowledgements)
+
+  - [Installation](#installation)
+    - [Make vm](#make-vm)
+    - [Connect to vm](#connect-to-vm)
+    - [Setup vm](#setup-vm)
+    - [Clone repository](#clone-repository)
+    - [Vscode remote editing](#vscode-remote-editing)
+    - [Create environment](#create-environment)
+    - [Install pytorch](#install-pytorch)
+  - [install apex](#install-apex)
+    - [Setup kaggle's api](#setup-kaggles-api)
+    - [Download datasets from google drive](#download-datasets-from-google-drive)
+- [Documentation](#documentation)
+  - [U-GAT-IT](#u-gat-it)
+    - [Colab](#colab)
+    - [GCP (Pytorch version)](#gcp-pytorch-version)
+- [Contributing](#contributing)
+- [Authors](#authors)
+- [License](#license)
+- [Acknowledgements](#acknowledgements)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
-
-# Installation on GCP
-
--   `gcloud compute instances create gans --zone="us-west1-b" --image-family="pytorch-latest-cu100" --image-project=deeplearning-platform-release --maintenance-policy=TERMINATE --accelerator="type=nvidia-tesla-v100,count=1" --metadata="install-nvidia-driver=True" --preemptible --boot-disk-size="100GB" --custom-cpu=8 --custom-memory=16`
--   `gcloud compute ssh gans`
--   `sudo apt-get update`
--   `sudo apt-get upgrade`
--   `git clone https://github.com/bkkaggle/gans.git`
--   `cd gans`
--   `conda env create -f environment.yml`
--   `source activate gans`
--   `pip install future`
--   `conda install pytorch torchvision cudatoolkit=10.0 -c pytorch`
 
 ## Installation
 
@@ -122,32 +117,53 @@
 -   `vim ~/.kaggle/kaggle.json`
 -   paste in api key `{"username":"[USERNAME]","key":"[API_KEY]"}`
 
+### Download datasets from google drive
+
+-   `wget https://github.com/gdrive-org/gdrive/releases/download/2.1.0/gdrive-linux-x64`
+-   `mv gdrive-linux-x64 gdrive`
+-   `chmod +x gdrive`
+-   authenticate with `./gdrive about`
+
 # Documentation
 
 ## U-GAT-IT
 
--   https://github.com/taki0112/UGATIT
+There is a [Tensorflow version](https://github.com/taki0112/UGATIT) and a [Pytorch version](https://github.com/znxlwm/UGATIT-pytorch)
 
-    -   pytorch version is here: https://github.com/znxlwm/UGATIT-pytorch
-    -   cat2dog saved model is here: https://github.com/taki0112/UGATIT/issues/51
-    -   default saved models are available in repo
+### Colab
 
-    -   my notebook (https://colab.research.google.com/drive/1O2BZE8ptAPE0CODbk7yjBgOuPe9YLQZo)
+There is no currently available pretrained model for pytorch, so the easiest way to get started is to use my colab notebook
 
-    -   finetune
-        -   cat2dog instructions (https://www.kaggle.com/waifuai/ugatit-cat2dog-pretrained-model)
+<a href="https://colab.research.google.com/github/bkkaggle/gans/blob/master/UGATIT.ipynb">
+    <img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab" />
+</a>
 
--   https://github.com/NVlabs/FUNIT
--   https://github.com/junyanz/pytorch-CycleGAN-and-pix2pix
--   https://github.com/ShenYujun/InterFaceGAN
--   https://github.com/ali-design/gan_steerability
--   https://github.com/CSAILVision/gandissect
--   https://github.com/zllrunning/video-object-removal
--   https://github.com/Puzer/stylegan-encoder
--   https://github.com/facebookresearch/pytorch_GAN_zoo
--   https://github.com/NVlabs/stylegan
--   https://github.com/shaoanlu/fewshot-face-translation-GAN
--   https://github.com/SummitKwan/transparent_latent_gan
+### GCP (Pytorch version)
+
+Train on your own dataset as shown in the [repository](https://github.com/znxlwm/UGATIT-pytorch#usage). There currently aren't any pretrained pytorch models.
+
+-   Clone the pytorch repo `git clone https://github.com/znxlwm/UGATIT-pytorch.git`
+
+-   Download the dataset of your choice
+
+    -   cat2dog `kaggle datasets download -d waifuai/ugatit-cat2dog-pretrained-model`
+
+-   Unzip the dataset
+-   Create a dataset folder under `/dataset` for your dataset (If you're using a pretrained model, the name of the folder must match the name of the saved checkpoint, e.g. cat2dog).
+-   Create subfolders `testA`, `testB`, `trainA`, and `trainB` under your dataset's folder. Place any images you want to transform from a to b (cat2dog) in the `testA` folder, images you want to transform from b to a (dog2cat) in the `testB` folder, and do the same for the `trainA` and `trainB` folders if you want to train your own GAN.
+-   Train the model `python main.py --dataset cat2dog --phase train`. Add `--light=True` if you get OOM errors.
+
+*   https://github.com/NVlabs/FUNIT
+*   https://github.com/junyanz/pytorch-CycleGAN-and-pix2pix
+*   https://github.com/ShenYujun/InterFaceGAN
+*   https://github.com/ali-design/gan_steerability
+*   https://github.com/CSAILVision/gandissect
+*   https://github.com/zllrunning/video-object-removal
+*   https://github.com/Puzer/stylegan-encoder
+*   https://github.com/facebookresearch/pytorch_GAN_zoo
+*   https://github.com/NVlabs/stylegan
+*   https://github.com/shaoanlu/fewshot-face-translation-GAN
+*   https://github.com/SummitKwan/transparent_latent_gan
 
 # Contributing
 
