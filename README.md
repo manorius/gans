@@ -52,6 +52,11 @@
     -   [U-GAT-IT](#u-gat-it)
         -   [Colab](#colab)
         -   [GCP (Pytorch version)](#gcp-pytorch-version)
+    -   [FUNIT](#funit)
+        -   [Colab](#colab-1)
+        -   [GCP](#gcp)
+            -   [Training](#training)
+            -   [Testing](#testing)
 -   [Contributing](#contributing)
 -   [Authors](#authors)
 -   [License](#license)
@@ -185,7 +190,8 @@ Run the model as shown in the [README](https://github.com/NVlabs/FUNIT):
 
 Point `--input` to the image you want to transform, `--class_image_folder` to a folder with a few images of the class you want to transform the input image to, and `--output` to the path for the output image.
 
--   https://github.com/NVlabs/FUNIT
+-   https://github.com/NVlabs/SPADE
+-   https://github.com/NVIDIA/vid2vid
 -   https://github.com/junyanz/pytorch-CycleGAN-and-pix2pix
 -   https://github.com/ShenYujun/InterFaceGAN
 -   https://github.com/ali-design/gan_steerability
