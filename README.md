@@ -148,17 +148,54 @@ Train on your own dataset as shown in the [repository](https://github.com/znxlwm
 -   Create subfolders `testA`, `testB`, `trainA`, and `trainB` under your dataset's folder. Place any images you want to transform from a to b (cat2dog) in the `testA` folder, images you want to transform from b to a (dog2cat) in the `testB` folder, and do the same for the `trainA` and `trainB` folders if you want to train your own GAN.
 -   Train the model `python main.py --dataset cat2dog --phase train`. Add `--light=True` if you get OOM errors.
 
-*   https://github.com/NVlabs/FUNIT
-*   https://github.com/junyanz/pytorch-CycleGAN-and-pix2pix
-*   https://github.com/ShenYujun/InterFaceGAN
-*   https://github.com/ali-design/gan_steerability
-*   https://github.com/CSAILVision/gandissect
-*   https://github.com/zllrunning/video-object-removal
-*   https://github.com/Puzer/stylegan-encoder
-*   https://github.com/facebookresearch/pytorch_GAN_zoo
-*   https://github.com/NVlabs/stylegan
-*   https://github.com/shaoanlu/fewshot-face-translation-GAN
-*   https://github.com/SummitKwan/transparent_latent_gan
+## FUNIT
+
+There is an official [pytorch](https://github.com/NVlabs/FUNIT) implementation.
+
+### Colab
+
+<a href="https://colab.research.google.com/github/bkkaggle/gans/blob/master/FUNIT.ipynb">
+    <img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab" />
+</a>
+
+### GCP
+
+Train on your own dataset, or use a pretrained model
+
+Follow the instructions in the [README](https://github.com/NVlabs/FUNIT):
+
+-   `git clone https://github.com/NVlabs/FUNIT.git`
+
+#### Training
+
+Use the authors animal face dataset and follow the instructions [here](https://github.com/NVlabs/FUNIT#animal-face-dataset) or substitute it with your own.
+
+#### Testing
+
+Download the pretrained model from Google drive
+
+-   `./gdrive download 1CsmSSWyMngtOLUL5lI-sEHVWc2gdJpF9`
+-   `mkdir pretrained`
+-   `mv pretrained.tar.gz pretrained/`
+-   `tar -xf pretrained.tar.gz`
+
+Run the model as shown in the [README](https://github.com/NVlabs/FUNIT):
+
+-   `python test_k_shot.py --config configs/funit_animals.yaml --ckpt pretrained/animal149_gen.pt --input images/input_content.jpg --class_image_folder images/n02138411 --output ./output.jpg`
+
+Point `--input` to the image you want to transform, `--class_image_folder` to a folder with a few images of the class you want to transform the input image to, and `--output` to the path for the output image.
+
+-   https://github.com/NVlabs/FUNIT
+-   https://github.com/junyanz/pytorch-CycleGAN-and-pix2pix
+-   https://github.com/ShenYujun/InterFaceGAN
+-   https://github.com/ali-design/gan_steerability
+-   https://github.com/CSAILVision/gandissect
+-   https://github.com/zllrunning/video-object-removal
+-   https://github.com/Puzer/stylegan-encoder
+-   https://github.com/facebookresearch/pytorch_GAN_zoo
+-   https://github.com/NVlabs/stylegan
+-   https://github.com/shaoanlu/fewshot-face-translation-GAN
+-   https://github.com/SummitKwan/transparent_latent_gan
 
 # Contributing
 
@@ -174,6 +211,6 @@ This project is licensed under the MIT license - see the [license](LICENSE) file
 
 # Acknowledgements
 
-This project contains code from: (https://github.com/taki0112/UGATIT),
+This project contains code from: (https://github.com/taki0112/UGATIT), (https://github.com/NVlabs/FUNIT)
 
 This README is based on (https://github.com/bkkaggle/grover) and (https://github.com/rish-16/gpt2client)
