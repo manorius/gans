@@ -57,6 +57,14 @@
         -   [GCP](#gcp)
             -   [Training](#training)
             -   [Testing](#testing)
+    -   [CycleGAN](#cyclegan)
+        -   [Colab](#colab-2)
+        -   [GCP](#gcp-1)
+            -   [Datasets](#datasets)
+            -   [Pretrained models](#pretrained-models)
+            -   [Training](#training-1)
+            -   [Testing](#testing-1)
+    -   [Pix2Pix](#pix2pix)
 -   [Contributing](#contributing)
 -   [Authors](#authors)
 -   [License](#license)
@@ -155,7 +163,7 @@ Train on your own dataset as shown in the [repository](https://github.com/znxlwm
 
 ## FUNIT
 
-There is an official [pytorch](https://github.com/NVlabs/FUNIT) implementation.
+I'm using the official [pytorch](https://github.com/NVlabs/FUNIT) implementation.
 
 ### Colab
 
@@ -190,9 +198,64 @@ Run the model as shown in the [README](https://github.com/NVlabs/FUNIT):
 
 Point `--input` to the image you want to transform, `--class_image_folder` to a folder with a few images of the class you want to transform the input image to, and `--output` to the path for the output image.
 
--   https://github.com/NVlabs/SPADE
--   https://github.com/NVIDIA/vid2vid
--   https://github.com/junyanz/pytorch-CycleGAN-and-pix2pix
+## CycleGAN
+
+I'm using [this](https://github.com/junyanz/pytorch-CycleGAN-and-pix2pix) repository's CycleGAN implementation. It also contains instructions for how to use CycleGAN on multiple datasets.
+
+### Colab
+
+### GCP
+
+To install, follow the instructions in the [repository](https://github.com/junyanz/pytorch-CycleGAN-and-pix2pix), or use my copied instructions here.
+
+-   `git clone https://github.com/junyanz/pytorch-CycleGAN-and-pix2pix`
+
+This repository uses a few custom pip packages, install them with
+
+-   `pip install -r requirements.txt`
+
+#### Datasets
+
+Download one of the official datasets with:
+
+-   `bash ./datasets/download_cyclegan_dataset.sh [apple2orange, orange2apple, summer2winter_yosemite, winter2summer_yosemite, horse2zebra, zebra2horse, monet2photo, style_monet, style_cezanne, style_ukiyoe, style_vangogh, sat2map, map2sat, cityscapes_photo2label, cityscapes_label2photo, facades_photo2label, facades_label2photo, iphone2dslr_flower]`
+
+Or use your own dataset by creating the appropriate folders and adding in the images.
+
+-   Create a dataset folder under `/dataset` for your dataset.
+-   Create subfolders `testA`, `testB`, `trainA`, and `trainB` under your dataset's folder. Place any images you want to transform from a to b (cat2dog) in the `testA` folder, images you want to transform from b to a (dog2cat) in the `testB` folder, and do the same for the `trainA` and `trainB` folders.
+
+#### Pretrained models
+
+Download one of the official pretrained models with:
+
+-   `bash ./scripts/download_cyclegan_model.sh [apple2orange, orange2apple, summer2winter_yosemite, winter2summer_yosemite, horse2zebra, zebra2horse, monet2photo, style_monet, style_cezanne, style_ukiyoe, style_vangogh, sat2map, map2sat, cityscapes_photo2label, cityscapes_label2photo, facades_photo2label, facades_label2photo, iphone2dslr_flower]`
+
+Or add your own pretrained model to `./checkpoints/{NAME}_pretrained/latest_net_G.pt`
+
+#### Training
+
+-   `python train.py --dataroot ./datasets/horse2zebra --name horse2zebra --model cycle_gan`
+
+Change the `--dataroot` and `--name` to your own dataset's path and model's name. Use `--gpu_ids 0,1,..` to train on multiple GPUs and `--batch_size` to change the batch size. I've found that a batch size of 16 fits onto 4 V100s and can finish training an epoch in ~90s.
+
+Once your model has trained, copy over the last checkpoint to a format that the testing model can automatically detect:
+
+Use `cp ./checkpoints/horse2zebra/latest_net_G_A.pth ./checkpoints/horse2zebra/latest_net_G.pth` if you want to transform images from class A to class B and `cp ./checkpoints/horse2zebra/latest_net_G_B.pth ./checkpoints/horse2zebra/latest_net_G.pth` if you want to transform images from class B to class A.
+
+#### Testing
+
+-   `python test.py --dataroot datasets/horse2zebra/testA --name horse2zebra_pretrained --model test --no_dropout`
+
+Change the `--dataroot` and `--name` to be consistent with your trained model's configuration.
+
+> from https://github.com/junyanz/pytorch-CycleGAN-and-pix2pix:
+> The option --model test is used for generating results of CycleGAN only for one side. This option will automatically set --dataset_mode single, which only loads the images from one set. On the contrary, using --model cycle_gan requires loading and generating results in both directions, which is sometimes unnecessary. The results will be saved at ./results/. Use --results_dir {directory_path_to_save_result} to specify the results directory.
+
+> For your own experiments, you might want to specify --netG, --norm, --no_dropout to match the generator architecture of the trained model.
+
+## Pix2Pix
+
 -   https://github.com/ShenYujun/InterFaceGAN
 -   https://github.com/ali-design/gan_steerability
 -   https://github.com/CSAILVision/gandissect
