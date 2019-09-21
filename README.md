@@ -204,6 +204,10 @@ I'm using [this](https://github.com/junyanz/pytorch-CycleGAN-and-pix2pix) reposi
 
 ### Colab
 
+<a href="https://colab.research.google.com/github/bkkaggle/gans/blob/master/CycleGAN.ipynb">
+    <img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab" />
+</a>
+
 ### GCP
 
 To install, follow the instructions in the [repository](https://github.com/junyanz/pytorch-CycleGAN-and-pix2pix), or use my copied instructions here.
@@ -256,6 +260,57 @@ Change the `--dataroot` and `--name` to be consistent with your trained model's 
 
 ## Pix2Pix
 
+### Colab
+
+<a href="https://colab.research.google.com/github/bkkaggle/gans/blob/master/Pix2Pix.ipynb">
+    <img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab" />
+</a>
+
+### GCP
+
+To install, follow the instructions in the [repository](https://github.com/junyanz/pytorch-CycleGAN-and-pix2pix), or use my copied instructions here.
+
+-   `git clone https://github.com/junyanz/pytorch-CycleGAN-and-pix2pix`
+
+This repository uses a few custom pip packages, install them with
+
+-   `pip install -r requirements.txt`
+
+#### Datasets
+
+Download one of the official datasets with:
+
+-   `bash ./datasets/download_pix2pix_dataset.sh [cityscapes, night2day, edges2handbags, edges2shoes, facades, maps]`
+
+Or use your own dataset by creating the appropriate folders and adding in the images. Follow the instructions [here](https://github.com/junyanz/pytorch-CycleGAN-and-pix2pix/blob/master/docs/datasets.md#pix2pix-datasets).
+
+#### Pretrained models
+
+Download one of the official pretrained models with:
+
+-   `bash ./scripts/download_pix2pix_model.sh [edges2shoes, sat2map, map2sat, facades_label2photo, and day2night]`
+
+Or add your own pretrained model to `./checkpoints/{NAME}_pretrained/latest_net_G.pt`
+
+#### Training
+
+-   `python train.py --dataroot ./datasets/facades --name facades_pix2pix --model pix2pix --direction BtoA`
+
+Change the `--dataroot` and `--name` to your own dataset's path and model's name. Use `--gpu_ids 0,1,..` to train on multiple GPUs and `--batch_size` to change the batch size. Add `--direction BtoA` if you want to train a model to transfrom from class B to A.
+
+#### Testing
+
+-   `python test.py --dataroot ./datasets/facades --direction BtoA --model pix2pix --name facades_label2photo_pretrained`
+
+Change the `--dataroot`, `--name`, and `--direction` to be consistent with your trained model's configuration and how you want to transform images.
+
+> from https://github.com/junyanz/pytorch-CycleGAN-and-pix2pix:
+> Note that we specified --direction BtoA as Facades dataset's A to B direction is photos to labels.
+
+> If you would like to apply a pre-trained model to a collection of input images (rather than image pairs), please use --model test option. See ./scripts/test_single.sh for how to apply a model to Facade label maps (stored in the directory facades/testB).
+
+> See a list of currently available models at ./scripts/download_pix2pix_model.sh
+
 -   https://github.com/ShenYujun/InterFaceGAN
 -   https://github.com/ali-design/gan_steerability
 -   https://github.com/CSAILVision/gandissect
@@ -280,6 +335,6 @@ This project is licensed under the MIT license - see the [license](LICENSE) file
 
 # Acknowledgements
 
-This project contains code from: (https://github.com/taki0112/UGATIT), (https://github.com/NVlabs/FUNIT)
+This project contains code from: (https://github.com/taki0112/UGATIT), (https://github.com/NVlabs/FUNIT), (https://github.com/junyanz/pytorch-CycleGAN-and-pix2pix)
 
 This README is based on (https://github.com/bkkaggle/grover) and (https://github.com/rish-16/gpt2client)
