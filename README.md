@@ -317,13 +317,14 @@ Change the `--dataroot`, `--name`, and `--direction` to be consistent with your 
 
 > See a list of currently available models at ./scripts/download_pix2pix_model.sh
 
--   https://github.com/ShenYujun/InterFaceGAN
--   https://github.com/ali-design/gan_steerability
 -   https://github.com/CSAILVision/gandissect
--   https://github.com/zllrunning/video-object-removal
--   https://github.com/Puzer/stylegan-encoder
--   https://github.com/facebookresearch/pytorch_GAN_zoo
 -   https://github.com/NVlabs/stylegan
+-   https://github.com/Puzer/stylegan-encoder
+-   https://github.com/pbaylies/stylegan-encoder
+
+-   https://github.com/ali-design/gan_steerability
+-   https://github.com/ShenYujun/InterFaceGAN
+
 -   https://github.com/shaoanlu/fewshot-face-translation-GAN
 -   https://github.com/SummitKwan/transparent_latent_gan
 
