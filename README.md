@@ -317,9 +317,7 @@ Change the `--dataroot`, `--name`, and `--direction` to be consistent with your 
 
 > See a list of currently available models at ./scripts/download_pix2pix_model.sh
 
--   https://github.com/CSAILVision/gandissect
 -   https://github.com/NVlabs/stylegan
--   https://github.com/Puzer/stylegan-encoder
 -   https://github.com/pbaylies/stylegan-encoder
 
 -   https://github.com/ali-design/gan_steerability
